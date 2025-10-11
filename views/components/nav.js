@@ -21,7 +21,7 @@ const createNavHome = () => {
                         </div>`;
 };
 
-const createNavSignunp = () => {
+const createNavSignup = () => {
     navbar.innerHTML = `<div class="max-width-7xl h-16 mx-auto flex items-center px-4 justify-between">
                             <p class="font-bold text-sm text-white">TodoApp</p>
 
@@ -81,7 +81,7 @@ const createNavTodos = () => {
 if(window.location.pathname === '/') {
     createNavHome();
 } else if (window.location.pathname === '/signup/') {
-    createNavSignunp()
+    createNavSignup()
 } else if (window.location.pathname === '/login/') {
     createNavLogin();
 } else if (window.location.pathname === '/todos/') {
