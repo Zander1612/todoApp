@@ -1,3 +1,6 @@
+import { createNotification } from '../components/notification.js';
+
+
 //Validation Patterns (Regex)
 const EMAIL_VALIDATION = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PASSWORD_VALIDATION = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$/;
@@ -10,6 +13,7 @@ const emailInput = document.querySelector('#email-input');
 const passwordInput = document.querySelector('#password-input');
 const matchInput = document.querySelector('#match-input');
 const formBtn = document.querySelector('#form-btn');
+const notification = document.querySelector('#notification');
 
 
 //Validation
@@ -69,13 +73,30 @@ form.addEventListener('submit', async e => {
             email: emailInput.value,
             password: passwordInput.value
         }
-        const response = await axios.post('/api/users', newUser);
-        console.log(response);
-    } catch (error) {
-        console.log(error);
         
+        const { data } = await axios.post('/api/users', newUser);
+        createNotification(false, data);
+        setTimeout(() => {
+            notification.innerHTML = '';
+        }, 4000);
+
+        nameInput.value = '';
+        emailInput.value = '';
+        passwordInput.value = '';
+        matchInput.value = '';
+
+        validation(nameInput, false);
+        validation(emailInput, false);
+        validation(passwordInput, false);
+        validation(matchInput, false);
+
+    } catch (error) {
+        createNotification(true, error.response.data.error);
+        setTimeout(() => {
+            notification.innerHTML = '';
+        }, 4000);
     }
 
-})
+});
 
 

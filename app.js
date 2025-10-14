@@ -1,12 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const path = require('path');
 const mongoose = require('mongoose');
-const usersRouter = require('./controllers/users');
-require('dotenv').config();
+const path = require('path');
 const cors = require('cors');
 const cookiesParser = require('cookie-parser');
 const morgan = require('morgan');
+const usersRouter = require('./controllers/users');
 
 (async() => {
 try {
