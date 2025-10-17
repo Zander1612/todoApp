@@ -73,22 +73,26 @@ form.addEventListener('submit', async e => {
             email: emailInput.value,
             password: passwordInput.value
         }
-        
-        const { data } = await axios.post('/api/users', newUser);
-        createNotification(false, data);
-        setTimeout(() => {
-            notification.innerHTML = '';
-        }, 4000);
 
-        nameInput.value = '';
-        emailInput.value = '';
-        passwordInput.value = '';
-        matchInput.value = '';
+        // nameInput.value = '';
+        // emailInput.value = '';
+        // passwordInput.value = '';
+        // matchInput.value = '';
 
         validation(nameInput, false);
         validation(emailInput, false);
         validation(passwordInput, false);
         validation(matchInput, false);
+        
+        console.log('new user',newUser);
+        
+        const {data} = await axios.post('/api/users', newUser);
+        console.log('string', data);
+        
+        createNotification(false, data);
+        setTimeout(() => {
+            notification.innerHTML = '';
+        }, 4000);
 
     } catch (error) {
         createNotification(true, error.response.data.error);
@@ -98,5 +102,6 @@ form.addEventListener('submit', async e => {
     }
 
 });
+
 
 

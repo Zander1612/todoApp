@@ -18,29 +18,35 @@ loginRouter.post('/', async (req, res) => {
     }
 
         const isCorrect = await bcrypt.compare(password, userExist.passwordHash);
-if (!isCorrect) {
-    return response.status(400).json({ error:'email o contraseña invalido'});
-}
+    if (!isCorrect) {
+        return response.status(400).json({ error:'email o contraseña invalido'});
+    }
 
-const userForToken = {
-    id: userExist.id, 
-}
+    const userForToken = {
+        id: userExist.id, 
+    }
 
-const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET , {})
-expiresIn: 'id'
+    // const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET , {})
+    // expiresIn: 'id'
+
+    const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: 'Id'
+    });
+    
+    console.log(new Date());
+    
+    
+    
+    response.cookie('accessToken', accessToken, {
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1),
+        sequre: process.env.NODE_ENV === 'production',
+        httpOnly: true
+    });
+    
+    return response.sendStatus(200)
 });
 
-console.log(new Date());
 
-
-
-response.cookie('accessToken', accessToken, {
-    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1),
-sequre: process.env.NODE_ENV === 'production',
-httpOnly: true
-});
-
-return response.sendStatus(200)
 
 
 module.exports = loginRouter;
