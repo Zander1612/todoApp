@@ -7,7 +7,7 @@ const cors = require('cors');
 const cookiesParser = require('cookie-parser');
 const morgan = require('morgan');
 const usersRouter = require('./controllers/users');
-const loginRouter = require('./controllers/login');
+const loginRouter = require('./controllers/login.js');
 
 (async() => {
     try {

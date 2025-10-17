@@ -19,9 +19,9 @@ usersRouter.post('/', async (req, res) => {
         return res.status(400).json({ error: 'El correo ya está en uso' });
     }
 
-    const saltRounds = 10;
+    // const saltRounds = 10;
 
-    const passwordHash = await bcrypt.hash(password, saltRounds);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     const newUser = new User({
         name,
