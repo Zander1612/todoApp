@@ -37,7 +37,10 @@ app.use('/verify/:token', express.static(path.resolve('views', 'verify')));
 //Rutas Backend
 
 app.use('/api/users', usersRouter);
+app.use(morgan('tiny'));
 
-
+//Rutas Backend
+app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
 
 module.exports = app;
