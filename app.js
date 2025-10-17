@@ -33,10 +33,6 @@ app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/img', express.static(path.resolve('views', 'img')));
 app.use('/verify/:token', express.static(path.resolve('views', 'verify')));
 
-
-//Rutas Backend
-
-app.use('/api/users', usersRouter);
 app.use(morgan('tiny'));
 
 //Rutas Backend
