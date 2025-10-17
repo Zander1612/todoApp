@@ -1,5 +1,5 @@
+import { request } from '../../app.js';
 import { createNotification } from '../components/notification.js';
-
 
 //Validation Patterns (Regex)
 const EMAIL_VALIDATION = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -73,12 +73,6 @@ form.addEventListener('submit', async e => {
             email: emailInput.value,
             password: passwordInput.value
         }
-        
-        const { data } = await axios.post('/api/users', newUser);
-        createNotification(false, data);
-        setTimeout(() => {
-            notification.innerHTML = '';
-        }, 4000);
 
         nameInput.value = '';
         emailInput.value = '';
@@ -89,6 +83,12 @@ form.addEventListener('submit', async e => {
         validation(emailInput, false);
         validation(passwordInput, false);
         validation(matchInput, false);
+        
+        const { data } = await axios.post('/api/users', newUser);
+        createNotification(false, data);
+        setTimeout(() => {
+            notification.innerHTML = '';
+        }, 4000);
 
     } catch (error) {
         createNotification(true, error.response.data.error);
@@ -98,5 +98,7 @@ form.addEventListener('submit', async e => {
     }
 
 });
+
+request.send();
 
 

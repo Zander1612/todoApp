@@ -3,7 +3,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const { PAGE_URL } = require('../config.js');
+const { PAGE_URL } = require('../config');
 
 // Post User
 usersRouter.post('/', async (req, res) => {
@@ -26,13 +26,12 @@ usersRouter.post('/', async (req, res) => {
     const newUser = new User({
         name,
         email,
-        passwordHash
-    })
+        passwordHash,
+    });
 
     const saveUser= await newUser.save();
-    console.log(saveUser);
     
-    const token = jwt.sign({id: saveUser.id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '3h'})
+    const token = jwt.sign({id: saveUser.id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '3h'});
 
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -48,7 +47,7 @@ usersRouter.post('/', async (req, res) => {
         from: process.env.EMAIL_USER, // sender address
         to: saveUser.email, // list of receivers
         subject: "Verifica tu cuenta", // Subject line
-        html: `<a href="${PAGE_URL}/${token}">Verificar Cuenta</a>`,
+        html: `<a href="${PAGE_URL}/verify/${token}">Verificar Correo</a>`,
     });
 
     return res.status(201).json('Usuario creado correctamente, por favor verifica tu cuenta');

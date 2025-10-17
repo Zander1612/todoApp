@@ -9,14 +9,14 @@ const morgan = require('morgan');
 const usersRouter = require('./controllers/users');
 
 (async() => {
-try {
-    await mongoose.connect(process.env.MONGO_URI_TEST);
-    console.log('Conectado a Mongo DB');
+    try {
+        await mongoose.connect(process.env.MONGO_URI_TEST);
+        console.log('Conectado a Mongo DB');
     
-} catch (error) {
-    console.log(error);
+    } catch (error) {
+        console.log(error);
     
-}
+    }
 })()
 
 app.use(cors());
@@ -30,12 +30,14 @@ app.use('/login', express.static(path.resolve('views', 'login')));
 app.use('/signup', express.static(path.resolve('views', 'signup')));
 app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/img', express.static(path.resolve('views', 'img')));
-
-app.use(morgan('tiny'));
+app.use('/verify/:token', express.static(path.resolve('views', 'verify')));
 
 
 //Rutas Backend
+
 app.use('/api/users', usersRouter);
+
+app.use(morgan('tiny'));
 
 
 
