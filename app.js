@@ -7,6 +7,7 @@ const cors = require('cors');
 const cookiesParser = require('cookie-parser');
 const morgan = require('morgan');
 const usersRouter = require('./controllers/users');
+const loginRouter = require('./controllers/login');
 
 (async() => {
     try {
@@ -36,8 +37,6 @@ app.use('/verify/:token', express.static(path.resolve('views', 'verify')));
 //Rutas Backend
 
 app.use('/api/users', usersRouter);
-
-app.use(morgan('tiny'));
 
 
 
