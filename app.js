@@ -39,5 +39,6 @@ app.use(morgan('tiny'));
 //Rutas Backend
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/logout', logoutRouter);
 
 module.exports = app;
