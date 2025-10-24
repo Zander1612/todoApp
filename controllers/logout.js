@@ -13,3 +13,5 @@ response.clearCookie('accessToken', {
 
 return response.sendStatus(204);
 });
+
+module.exports = logoutRouter;

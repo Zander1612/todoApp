@@ -8,6 +8,7 @@ const cookiesParser = require('cookie-parser');
 const morgan = require('morgan');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login.js');
+const logoutRouter = require('./controllers/logout.js');
 
 (async() => {
     try {
