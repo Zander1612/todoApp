@@ -1,6 +1,5 @@
 import { createNotification } from '../components/notification.js';
 
-
 //Validation Patterns (Regex)
 const EMAIL_VALIDATION = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PASSWORD_VALIDATION = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$/;
@@ -14,7 +13,6 @@ const passwordInput = document.querySelector('#password-input');
 const matchInput = document.querySelector('#match-input');
 const formBtn = document.querySelector('#form-btn');
 const notification = document.querySelector('#notification');
-
 
 // Validation State
 let nameValidation = false;

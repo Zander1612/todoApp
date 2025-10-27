@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken')
 
 loginRouter.post('/', async (req, res) => {
     const {email, password} = req.body;
+    
     const userExist = await User.findOne({ email });
-
 
     if (!userExist) {
         return res.status(400).json({ error: 'email o contraseña invalido'})
@@ -27,10 +27,8 @@ loginRouter.post('/', async (req, res) => {
     }
 
     const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: 'Id'
+        expiresIn: '1d'
     });
-    
-    console.log(new Date());
     
     res.cookie('accessToken', accessToken, {
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1),
