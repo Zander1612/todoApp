@@ -31,7 +31,7 @@ const todoCount = () => {
 };
 
 //Agregar una nueva tarea (evento submit del form)
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
   // Validación del input
