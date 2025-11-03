@@ -8,7 +8,6 @@ const { PAGE_URL } = require('../config');
 // Post User
 usersRouter.post('/', async (req, res) => {
     const { name, email, password } = req.body;
-    console.log('str',req.body);
 
     // Validar que los campos no estén vacíos
     if (!name || !email || !password) {
@@ -17,7 +16,6 @@ usersRouter.post('/', async (req, res) => {
 
     // Validar que el correo no esté en uso
     const userExist = await User.findOne({ email });
-    console.log('userExist', userExist);
     if (userExist) {
         return res.status(400).json({ error: 'El correo ya está en uso' });
     }
@@ -34,10 +32,8 @@ usersRouter.post('/', async (req, res) => {
 
     // Guardar el usuario en la base de datos
     const saveUser= await newUser.save();
-    console.log('save', saveUser);
     
     const token = jwt.sign({id: saveUser.id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '3h'});
-    console.log('token', token);
     
 
     const transporter = nodemailer.createTransport({
