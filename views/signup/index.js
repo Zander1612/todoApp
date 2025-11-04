@@ -89,11 +89,9 @@ form.addEventListener('submit', async e => {
         validation(passwordInput, false);
         validation(matchInput, false);
         
-        console.log('new user',newUser);
         
         // Enviar el usuario al servidor
         const {data} = await axios.post('/api/users', newUser);
-        console.log('string', data);
         
         // Mostrar notificación
         createNotification(false, data);
