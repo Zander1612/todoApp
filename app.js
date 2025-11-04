@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { MONGO_URI } = require('./config');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -14,7 +15,7 @@ const todosRouter = require('./controllers/todos.js');
 
 (async() => {
     try {
-        await mongoose.connect(process.env.MONGO_URI_TEST);
+        await mongoose.connect(MONGO_URI);
         console.log('Conectado a Mongo DB');
     
     } catch (error) {
